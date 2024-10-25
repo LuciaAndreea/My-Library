@@ -17,7 +17,7 @@ function showBooks(){
     bookContainer.innerHTML = "";
 
     //make a for loop to iterate and display all the existing books
-    books.forEach(book =>{
+    books.forEach((book,index) =>{
         const bookCard = document.createElement("div");
         bookCard.className = "book-card";
         bookCard.innerHTML = `
@@ -25,10 +25,27 @@ function showBooks(){
              <p>Author: ${book.author}</p>
              <p>Number of pages: ${book.pages}</p>
              <p>Year of publication: ${book.year}</p>
+             <button class="remove-button" data-index="${index}">Remove book</button>
         `;
         //add the book-card elements in bookContainer
         bookContainer.appendChild(bookCard);
     });
+
+    //add eventListeners to each remove button so that everytime is clicked it calls the removeBook() function
+    const remoevButtons = document.querySelectorAll(".remove-button");
+    remoevButtons.forEach(button =>{
+        button.addEventListener("click" , function(){
+            const bookIndex = this.getAttribute("data-index");
+            removeBook(bookIndex);
+        })
+    })
+}
+
+//function to remove a book by index usng splice()
+function removeBook(index){
+    books.splice(index,1); 
+    saveBooksToStorage(books) //update the localStorage
+    showBooks();
 }
 
 
