@@ -60,3 +60,13 @@ button{
     border: none;
     background-color: red;
 }
+
+.read-status-button{
+    background-color: green;
+    margin-top: 10px;
+}
+
+#read{
+    display: inline;
+    margin-left: -70px;
+}
