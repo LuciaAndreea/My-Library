@@ -1,0 +1,23 @@
+.book-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.book-card{
+    border: 1px solic #ccc;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 16px;
+    width: 200px;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+}
+
+.book-card h3{
+    margin: 0;
+    font-size: 18px;
+}
+
+.book-card p{
+    margin: 8px 0;
+}
