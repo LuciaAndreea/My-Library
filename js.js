@@ -157,7 +157,19 @@ function createForm(){
     });
 }
 
+//function to check if the form is currently hidden
+function toggleFormVisibility(){
+    const formContainer = document.getElementById("formContainer");
+    if(formContainer.classList.contains("hidden")){
+        createForm(); //CREATE THE FORM ONLY IF IT IS NOT VISIBLE
+        formContainer.classList.remove("hidden");
+    }else{
+        formContainer.classList.add("hidden");
+    }
+}
+
 const newBookButton = document.getElementById("new-book");
-newBookButton.addEventListener("click" , createForm);
+//UPDATE the new book button allows the form to be shown or hidden each time is it clicked
+newBookButton.addEventListener("click" , toggleFormVisibility);
 
 showBooks();
