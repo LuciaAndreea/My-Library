@@ -1,3 +1,7 @@
+.hidden{
+    display: none;
+}
+
 .book-container{
     display: flex;
     flex-wrap: wrap;

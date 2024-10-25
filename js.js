@@ -1,23 +1,20 @@
+//function to get books from localStorage
+function getBooksFromStorage(){
+    const storedBooks = localStorage.getItem("books");
+    return storedBooks ? JSON.parse(storedBooks) :[]; //saves the updated books to localStorage or returns an empty array
+}
 
-//create an array ob books which contains the books objects
-const books = [
-    {
-        title:"Circe",
-        author: "Madeline Miller",
-        pages: 418,
-        year:2017
-    },
-    {
-        title: "Romeo and Juliet",
-        author:"William Shakespeare",
-        pages:70,
-        year:1597
-    }
-];
+//function to save books to localStorage in format JSON.strigify()
+function saveBooksToStorage(books){
+    localStorage.setItem("books", JSON.stringify(books));
+}
+ //UPDATE: the books are now stored in the books array initialized by reading from localStorage
+let books = getBooksFromStorage();
 
 //create a function that dispplays the books
 function showBooks(){
     const bookContainer = document.getElementById("bookContainer");
+    bookContainer.innerHTML = "";
 
     //make a for loop to iterate and display all the existing books
     books.forEach(book =>{
@@ -31,9 +28,9 @@ function showBooks(){
         `;
         //add the book-card elements in bookContainer
         bookContainer.appendChild(bookCard);
-    })
+    });
 }
-showBooks();
+
 
 //function to create a form which lets the user to enter a new book with all of it's attributes
 //the funtion will be called when the button "NEW BOOK" is clicked
@@ -45,15 +42,16 @@ function createForm(){
     //create the form labels and inputs
     const form = document.createElement("form");
 
-    const titleLabel = document.createElement("label");
-    titleLabel.textContent = "Name of the book";
-
     const titleInput = document.createElement("input");
     titleInput.type = "text";
     titleInput.name = "title";
 
+    const titleLabel = document.createElement("label");
+    titleLabel.textContent = "Name of the book";
+
+
     const authorLabel = document.createElement("label");
-    authorLabel.textContent = "Author of th book";
+    authorLabel.textContent = "Author of the book";
 
     const authorInput = document.createElement("input");
     authorInput.type = "text";
@@ -91,6 +89,7 @@ function createForm(){
 
     //add the form to the form container
     formContainer.append(form);
+    formContainer.classList.remove("hidden");//make the form visible
 
     //create the event which happens on the formm
     form.addEventListener("submit", function(event){
@@ -104,10 +103,14 @@ function createForm(){
 
         //add the new book to the existing library
         books.push(newBook);
+        saveBooksToStorage(books);
         //show the updated list of books
         showBooks();
+        form.reset();
     });
 }
 
 const newBookButton = document.getElementById("new-book");
 newBookButton.addEventListener("click" , createForm);
+
+showBooks();
