@@ -8,8 +8,21 @@ function getBooksFromStorage(){
 function saveBooksToStorage(books){
     localStorage.setItem("books", JSON.stringify(books));
 }
+
+//UPDATE: function to get the reading goal from localStorage
+function getReadingGoalLocal(){
+    return JSON.parse(localStorage.getItem("goal")) || 0;
+}
+
+//function to save the reading goal to localStorage
+function saveReadingGoalLocal(){
+    localStorage.setItem("goal" , JSON.stringify(goal));
+}
+
  //UPDATE: the books are now stored in the books array initialized by reading from localStorage
 let books = getBooksFromStorage();
+let goal = getReadingGoalLocal();
+document.getElementById("goalDisplay").textContent = goal;
 
 //create a function that dispplays the books
 function showBooks(){
@@ -33,6 +46,16 @@ function showBooks(){
         bookContainer.appendChild(bookCard);
     });
 
+
+    //make the goal button
+     document.getElementById("setGoalButton").addEventListener("click" , function(){
+        const goalInput = document.getElementById("goalInput").value;
+        goal = parseInt(goalInput) || 0;
+        document.getElementById("goalDisplay").textContent = goal;
+        saveReadingGoalLocal(goal);
+        updateReadProgress();
+     })
+
     //add eventListeners to each remove button so that everytime is clicked it calls the removeBook() function
     const remoevButtons = document.querySelectorAll(".remove-button");
     remoevButtons.forEach(button =>{
@@ -48,8 +71,18 @@ function showBooks(){
        button.addEventListener("click", function(){
         const bookIndex = this.getAttribute("data-index");
         toggleReadStatus(bookIndex);
-       })
-    })
+       });
+    });
+
+     //update read count
+     updateReadProgress();
+}
+
+//function to update the read count
+function updateReadProgress(){
+    const readCount = books.filter(book =>book.read).length;
+    document.getElementById("readCount").textContent =readCount;
+    document.getElementById("goalDisplay").textContent = goal;
 }
 
 //function to remove a book by index usng splice()
