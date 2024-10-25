@@ -25,6 +25,8 @@ function showBooks(){
              <p>Author: ${book.author}</p>
              <p>Number of pages: ${book.pages}</p>
              <p>Year of publication: ${book.year}</p>
+             <p>Status: ${book.read ? "Congrats! Another one to the collection;)" : "Not read. Yet ;)"}</p>
+             <button class="read-status-button" data-index="${index}">Change read status</button>
              <button class="remove-button" data-index="${index}">Remove book</button>
         `;
         //add the book-card elements in bookContainer
@@ -39,12 +41,28 @@ function showBooks(){
             removeBook(bookIndex);
         })
     })
+
+    //add eventListeners to each "Change read status" button  so that everytime is clicked it changes it's status
+    const readStatusButtons = document.querySelectorAll(".read-status-button");
+    readStatusButtons.forEach(button =>{
+       button.addEventListener("click", function(){
+        const bookIndex = this.getAttribute("data-index");
+        toggleReadStatus(bookIndex);
+       })
+    })
 }
 
 //function to remove a book by index usng splice()
 function removeBook(index){
     books.splice(index,1); 
     saveBooksToStorage(books) //update the localStorage
+    showBooks();
+}
+
+//function to change the status from true to false and updates the localStorage 
+function toggleReadStatus(index){
+    books[index].read = !books[index].read; 
+    saveBooksToStorage(books);
     showBooks();
 }
 
@@ -88,6 +106,15 @@ function createForm(){
     yearInput.type = "number";
     yearInput.name = "year";
 
+    //UPDATE: ADD A READ FIELD IN EACH OBJECT
+    const readLabel = document.createElement("label");
+    readLabel.htmlFor = "read";
+    readLabel.textContent = "Read";
+
+    const readInput = document.createElement("input");
+    readInput.type = "checkbox";
+    readInput.id = "read";
+
     //create a button called "Add new book" which will add the book to the array
     const btn = document.createElement("button");
     btn.type = "submit";
@@ -102,6 +129,8 @@ function createForm(){
     form.appendChild(pagesInput);
     form.appendChild(yearLabel);
     form.appendChild(yearInput);
+    form.appendChild(readLabel);
+    form.appendChild(readInput);
     form.appendChild(btn);
 
     //add the form to the form container
@@ -115,7 +144,8 @@ function createForm(){
             title:titleInput.value,
             author:authorInput.value,
             pages:pagesInput.value,
-            year:yearInput.value
+            year:yearInput.value,
+            read:readInput.checked
         };
 
         //add the new book to the existing library
