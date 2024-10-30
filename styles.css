@@ -116,3 +116,13 @@ button{
     color: red;
     font-weight: bold;
 }
+
+.emoji-button{
+    font-size: 15px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.selected{
+    outline:2px solid #000000;
+}

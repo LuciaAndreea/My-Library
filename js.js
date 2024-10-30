@@ -42,6 +42,10 @@ function showBooks(){
              <p>Number of pages: ${book.pages}</p>
              <p>Year of publication: ${book.year}</p>
              <p class="${readStatusClass}">Status: ${book.read ? "Congrats! Another one to the collection;)" : "Not read. Yet ;)"}</p>
+             <div class = "reviews">
+                      <span class="emoji-button ${book.review === "loved" ? "selected" : ""}" data-index = "${index}" data-review = "loved">❤️</span>
+                      <span class="emoji-button ${book.review === "mediocre" ? "selected" : ""}" data-index = "${index}" data-review = "mediocre">🤔</span>
+                      <span class="emoji-button ${book.review === "disliked" ? "selected" : ""}" data-index = "${index}" data-review = "disliked">😥</span>
              <button class="read-status-button" data-index="${index}">Change read status</button>
              <button class="remove-button" data-index="${index}">Remove book</button>
         `;
@@ -79,6 +83,16 @@ function showBooks(){
        });
     });
 
+    //event listeners for all the emoji buttons
+    const emojiButtons = document.querySelectorAll(".emoji-button");
+    emojiButtons.forEach(button =>{
+        button.addEventListener("click", function(){
+            const bookIndex = this.getAttribute("data-index");
+            const reviewKind = this.getAttribute("data-review");
+            toggleReview(bookIndex,reviewKind);
+        });
+    });
+
      //update read count
      updateReadProgress();
 }
@@ -108,6 +122,13 @@ function removeBook(index){
 //function to change the status from true to false and updates the localStorage 
 function toggleReadStatus(index){
     books[index].read = !books[index].read; 
+    saveBooksToStorage(books);
+    showBooks();
+}
+
+//function to toggle the review
+function toggleReview(index, reviewKind){
+    books[index].review = reviewKind;
     saveBooksToStorage(books);
     showBooks();
 }
@@ -191,7 +212,8 @@ function createForm(){
             author:authorInput.value,
             pages:pagesInput.value,
             year:yearInput.value,
-            read:readInput.checked
+            read:readInput.checked,
+            review:null
         };
 
         //add the new book to the existing library
