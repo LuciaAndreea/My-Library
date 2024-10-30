@@ -33,18 +33,23 @@ function showBooks(){
     books.forEach((book,index) =>{
         const bookCard = document.createElement("div");
         bookCard.className = "book-card";
+
+        const readStatusClass = book.read ? "status-read" : "status-not-read";
+        
         bookCard.innerHTML = `
              <h3>${book.title}</h3>
              <p>Author: ${book.author}</p>
              <p>Number of pages: ${book.pages}</p>
              <p>Year of publication: ${book.year}</p>
-             <p>Status: ${book.read ? "Congrats! Another one to the collection;)" : "Not read. Yet ;)"}</p>
+             <p class="${readStatusClass}">Status: ${book.read ? "Congrats! Another one to the collection;)" : "Not read. Yet ;)"}</p>
              <button class="read-status-button" data-index="${index}">Change read status</button>
              <button class="remove-button" data-index="${index}">Remove book</button>
         `;
         //add the book-card elements in bookContainer
         bookContainer.appendChild(bookCard);
     });
+
+    checkReadingGoal();
 
 
     //make the goal button
@@ -76,6 +81,14 @@ function showBooks(){
 
      //update read count
      updateReadProgress();
+}
+
+//function to check is the reading goal has been reached
+function checkReadingGoal(){
+    const readBooksCount = books.filter(book => book.read).length;
+    if(readBooksCount >= goal){
+        alert(`Congratulations! You have reached your reading goal of ${goal} books! Keep it up!`);
+    }
 }
 
 //function to update the read count

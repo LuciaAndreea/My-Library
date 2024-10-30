@@ -2,7 +2,10 @@
     display: none;
 }
 
-
+h1{
+    display: flex;
+    justify-content: center;
+}
 
 .book-container{
     display: flex;
@@ -35,8 +38,8 @@
     color: #2e7d32;
     box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
     text-align: center;
-    position: absolute;
-    left: 700px;
+    bottom: 100px;
+    left: 300px;
 
 }
 
@@ -47,6 +50,7 @@
 
 .goal-input{
     margin: 10px 0;
+    width: 135px;
 }
 
 .book-card h3{
@@ -102,4 +106,13 @@ button{
 #read{
     display: inline;
     margin-left: -70px;
+}
+
+.status-read{
+    color: rgb(33, 245, 33);
+    font-weight: bold;
+}
+.status-not-read{
+    color: red;
+    font-weight: bold;
 }
