@@ -1,9 +1,23 @@
-# My-Library
-A library where you can keep track of your reading books , and achieve the year goal at reading ;) <br>
--I have provided a form which lets the users to enter new books <br>
--The program has the localStorage propriety implemented, so that the books will not disappear when the page is closed or refreshed <br>
--The users cand also change the read status of the book, and doing so a message will be displayed, to inform them <br>
--The program also has a review system for each book, based on three emojis (loved,it was okay,or didn't like at all) <br>
--The user can remove any book they added, being deleted from the localStorage as well <br>
--And finally the library has a READING GOAL, where users cand enter their goal at reading, and if that goal is reached, a congratulations message will be displayed
+📚 Online Library App
 
+The Online Library App is a small yet interactive web application built using JavaScript, HTML, and CSS. It allows users to add, track, and manage books in their personal library, with a focus on reading goals, progress tracking, and reviews. All data is stored in localStorage, ensuring persistence across sessions.
+
+🚀 Features
+
+ Add & Remove Books – Users can add books to their collection and remove them anytime, with changes reflected in localStorage.
+ 
+✔️ Read Status Toggle – Users can update the reading status of each book (Read/Not Read).
+
+✔️ Goal Setting & Achievement – Set a personal reading goal, track progress, and receive a congratulatory message upon completion.
+
+✔️ Emoji-Based Review System – Rate books using three expressive emoji options 
+
+✔️ Persistent Data with localStorage – Books and user settings remain saved even after refreshing the page.
+
+🛠️ Technologies Used
+
+HTML – Structure of the app
+
+CSS – Styling for a visually appealing and responsive design
+
+JavaScript (ES6) – Core functionality, localStorage management, UI interactions
