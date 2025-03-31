@@ -1,5 +1,8 @@
 📚 Online Library App
 
+🟢 Live Demo
+🔗 [View the Project](https://recipe-page-delta-flax.vercel.app)
+
 The Online Library App is a small yet interactive web application built using JavaScript, HTML, and CSS. It allows users to add, track, and manage books in their personal library, with a focus on reading goals, progress tracking, and reviews. All data is stored in localStorage, ensuring persistence across sessions.
 
 🚀 Features
